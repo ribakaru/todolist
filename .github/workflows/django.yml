@@ -9,7 +9,7 @@ on:
 
 jobs:
   my_job:
-    name: deploy to staging
+    name: ribakaru
     runs-on: ubuntu-22.04
   build:
 
