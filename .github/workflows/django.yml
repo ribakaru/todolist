@@ -2,7 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master/todolist" ]
+    branches: [ "master/djangotutorial" ]
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
