@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master/djangotutorial" ]
+    branches: [ "master/todolist/djangotutorial"]
   pull_request:
-    branches: [ "master/djangotutorial" ]
+    branches: [ "master/todolist/djangotutorial" ]
   workflow_dispatch:
 
 jobs:
