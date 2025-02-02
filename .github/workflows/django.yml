@@ -20,6 +20,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install -r djangotutorial/requirements.txt
     - name: Run tests
-      run: 
+      run: |
         py djangotutorial/manage.py runserver
