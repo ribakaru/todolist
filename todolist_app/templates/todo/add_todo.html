@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>追加</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style>
-        body {
-            background-color: #f0f8ff; /* AliceBlue */
-        }
+      body {
+        background-color: #f0f8ff; /* AliceBlue */
+      }
 
-        .container {
-            background-color: #ffffff; /* White */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
-        }
+      .container {
+        background-color: #ffffff; /* White */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+      }
 
-        .btn-info {
-            background-color: #87cefa; /* LightSkyBlue */
-            border-color: #87cefa; /* LightSkyBlue */
-        }
+      .btn-info {
+        background-color: #87cefa; /* LightSkyBlue */
+        border-color: #87cefa; /* LightSkyBlue */
+      }
 
-        .btn-info:hover {
-            background-color: #add8e6; /* LightBlue */
-            border-color: #add8e6; /* LightBlue */
-        }
+      .btn-info:hover {
+        background-color: #add8e6; /* LightBlue */
+        border-color: #add8e6; /* LightBlue */
+      }
 
-        .btn-danger {
-            background-color: #ff6347; /* Tomato */
-            border-color: #ff6347; /* Tomato */
-        }
+      .btn-danger {
+        background-color: #ff6347; /* Tomato */
+        border-color: #ff6347; /* Tomato */
+      }
 
-        .btn-danger:hover {
-            background-color: #ff4500; /* OrangeRed */
-            border-color: #ff4500; /* OrangeRed */
-        }
+      .btn-danger:hover {
+        background-color: #ff4500; /* OrangeRed */
+        border-color: #ff4500; /* OrangeRed */
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <h2>追加</h2>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">タイトル</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1">
+      <label for="exampleFormControlInput1" class="form-label">タイトル</label>
+      <input type="text" class="form-control" id="title" name="title" />
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">詳細</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <label for="exampleFormControlTextarea1" class="form-label">詳細</label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        name="description"
+      ></textarea>
     </div>
-    <a class="btn btn-primary" href="{% url 'todo:todo_list' %}" role="button">保存</a>
+    <a
+      class="btn btn-primary"
+      href="{% url 'todo:add_todo' %}"
+      role="button"
+      type="submit"
+      >保存</a
+    >
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
+  </body>
 </html>
