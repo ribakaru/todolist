@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>追加</title>
+    <title>削除</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -40,21 +39,20 @@
         }
     </style>
 </head>
-
 <body>
-    <h2>追加</h2>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">タイトル</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1">
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">詳細</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <a class="btn btn-primary" href="{% url 'todo:todo_list' %}" role="button">保存</a>
-    <!-- Bootstrap JS and dependencies -->
+    <h2>削除</h2>
+    <!-- 送信先を指定 -->
+    <form action="{% url 'todo:delete_todo' todo.id %}" method="POST">
+        <!-- セキュリティー対策 -->
+        {% csrf_token %}
+        <!-- タイトルを表示 -->
+        <p>{{ todo.title }}</p>
+        <!-- 削除ボタン -->
+        <button type="submit" class="btn btn-danger">削除</button>
+    </form>
+    <!-- Bootstrap JS and dependencies -->  
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
+</body>
 </html>

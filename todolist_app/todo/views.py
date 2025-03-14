@@ -1,42 +1,34 @@
 # todo/views.py
 from django.shortcuts import render, redirect
 from .models import ToDoItem
-from .forms import ToDoForm
-
-#追加したコード
-def index(request):
-    return render(request, 'todo/index.html')
 
 # ToDoアイテムのリストを取得
 def todo_list(request):
     todos = ToDoItem.objects.all()
     return render(request, 'todo/todo_list.html', {'todos': todos})
 
-# ToDoアイテムを追加
+#リストの追加
 def add_todo(request):
-    if request.method == 'POST':
-        form = ToDoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('todo_list')
-    else:
-        form = ToDoForm()
-    return render(request, 'todo/add_todo.html', {'form': form})
+    if request.method == 'POST': #POSTメソッドであるかどうかを判断
+        title = request.POST.get('title') #titleを取得
+        description = request.POST.get('description') #descriptionを取得
+        todo_item = ToDoItem(title=title, description=description) #ToDoItemを作成
+        title == 'POST' #POSTメソッドであるかどうかを判断
+        todo_item.save() #保存
+        return redirect('todo_list') #リストを追加
+    return render(request, 'todo/add_todo.html')
 
-# 既存のToDoアイテムを編集
+#リストの編集
 def edit_todo(request, todo_id):
-    todo = ToDoItem.objects.get(pk=todo_id)
-    if request.method == 'POST':
-        form = ToDoForm(request.POST, instance=todo)
-        if form.is_valid():
-            form.save()
-            return redirect('todo_list')
-    else:
-        form = ToDoForm(instance=todo)
-    return render(request, 'todo/edit_todo.html', {'form': form, 'todo_id': todo_id})
+    todo_item = ToDoItem.objects.get(id=todo_id) #idを取得
+    return render(request, 'todo/edit_todo.html', {'todo_item': todo_item}) #リストを編集する
 
-# ToDoアイテムを削除
+#リストの削除
 def delete_todo(request, todo_id):
-    todo = ToDoItem.objects.get(pk=todo_id)
-    todo.delete()
-    return redirect('todo_list')
+    todo_item = ToDoItem.objects.get(id=todo_id) #idを取得
+    todo_item.delete() #削除
+    return redirect('todo_list') #リストを削除
+
+#リストの表示
+def index(request):
+    return render(request, 'todo/index.html')
