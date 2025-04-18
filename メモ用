@@ -33,3 +33,29 @@ htmlのみならそれぞれ開くことができる
 3/11 add_todo.htmlからtodo_list.htmlに飛べるようになった
 けど、runserverの後の画面と違うページ？に飛んでるようような気がする。動くかすことはできるが保存されない。
 
+3/14 ログを活用する
+宿題はviewのリスト追加、
+git hub　のブランチの切り方　
+git checkout -b add-method
+git add -A
+git status
+git commit -m "add method"
+git push origin add-method
+git checkout ブランチ名
+
+print(request.method)
+    if request.method == "POST": #POST(リソース新規生成)メソッドであるかどうかを判断
+        print("POSTメソッドです")
+        title = request.POST.get('title') #titleを取得
+        print(title)
+        description = request.POST.get('description') #descriptionを取得
+        print(description)
+        todo_item = ToDoItem(title="テストタイトル", description="テスト説明") #ToDoItemを作成
+        title == 'POST' #POSTメソッドであるかどうかを判断
+        todo_item.save() #保存
+        return redirect('/') #リストを追加
+
+3/24 add_todo.htmlからpostで送信されていないと思う。
+
+3/25 add_todo.html の65行目を<button type="submit" class="btn btn-primary" href="{}">追加</button>に変更したら動いた
+viewsも少し修正した。
