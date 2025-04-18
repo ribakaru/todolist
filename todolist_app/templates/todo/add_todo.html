@@ -45,26 +45,21 @@
 
   <body>
     <h2>追加</h2>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">タイトル</label>
-      <input type="text" class="form-control" id="title" name="title" />
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">詳細</label>
-      <textarea
-        class="form-control"
-        id="description"
-        rows="3"
-        name="description"
-      ></textarea>
-    </div>
-    <a
-      class="btn btn-primary"
-      href="{% url 'todo:add_todo' %}"
-      role="button"
-      type="submit"
-      >保存</a
-    >
+    <form action="{% url 'todo:add_todo' %}" method="POST">
+      {% csrf_token %} 
+      <div class="mb-3">
+        <label for="title" class="form-label">タイトル</label>
+        <input type="text" class="form-control" id="title" name="title" />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">詳細</label>
+        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        <form action="{% url 'todo:add_todo' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">追加</button>
+        </form>
+      </div>
+    </form>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
