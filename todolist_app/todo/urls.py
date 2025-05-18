@@ -9,6 +9,6 @@ urlpatterns = [
     path('', views.index,name='index'),
     path('', todo_list, name='todo_list'),
     path('add/', add_todo, name='add_todo'),
-    path('edit/', edit_todo, name='edit_todo'),
+    path("edit/", edit_todo, name='edit_todo'),
     path('delete/', delete_todo, name='delete_todo'),
 ]
