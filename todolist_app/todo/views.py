@@ -5,6 +5,11 @@ from .models import ToDoItem
 # ToDoアイテムのリストを取得
 def todo_list(request):
     todos = ToDoItem.objects.all() # todosという変数にToDoItem.objects.all()を格納している
+    ###########################################################################################
+    """ todo_item = ToDoItem.objects.get(id=65)
+    print(todo_item.title)
+    print(todo_item.description) """
+    ###########################################################################################
     # print(todos.last().title)
     # print(todos.last().description)
     # valueのリストを作成
@@ -34,9 +39,29 @@ def add_todo(request):
     return render(request, 'todo/add_todo.html')
 
 #リストの編集
-def edit_todo(request, id):
-    
+def edit_todo(request,):
+    todo_item = ToDoItem.objects.get(id='62')
+    ###########################################################################################
+    """ print(todo_item.title)
+    print(todo_item.description)
+    print(todo_item.id) """
+    ##########################################################################################
+    if request.method == "GET":
+        print('get')
+        return render(request, 'todo/edit_todo.html', {'todo_item': todo_item}) #edit_todo.htmlにtodo_itemの変数を渡す。これによってtodo_itemの情報を表示できるようになる。
+    ###########################################################################################
+    if request.method == "POST":
+        print('post')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        if title and description:
+            todo_item.title = request.POST.get('title')
+            todo_item.description = request.POST.get('description')
+            print(todo_item.title)
+            todo_item.save()
+        return redirect('todo:edit_todo')
     return render(request, 'todo/edit_todo.html')
+
 
 #リストの削除
 def delete_todo(request, todo_id):
