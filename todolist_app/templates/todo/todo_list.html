@@ -50,7 +50,7 @@
         <ul class="list-group inputgroup mt-3">
             {% for todo in todos %}
             <li class="list-group-item input-group-text d-flex justify-content-between align-items-center">
-                <a class="btn btn-primary" href="{%url 'todo:edit_todo' %}" role="button">編集</a>
+                <a class="btn btn-primary" href="{% url 'todo:edit_todo' %}" role="button">編集</a>
                 <input class = "form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
                     <div class = "box box-1">{{ todo.id }}</div>
                     <div class = "box box-2">{{ todo.title }}</div>
