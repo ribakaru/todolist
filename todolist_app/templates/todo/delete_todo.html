@@ -41,8 +41,8 @@
 </head>
 <body>
     <h2>削除</h2>
-    <!-- 送信先を指定 -->
-    <form action="{% url 'todo:delete_todo' todo.id %}" method="POST">
+    <h3>ToDo ID: {{ todo_item.id }}</h3>
+    <form action="{% url 'todo:delete_todo' todo_item.id %}" method="POST">
         <!-- セキュリティー対策 -->
         {% csrf_token %}
         <!-- タイトルを表示 -->

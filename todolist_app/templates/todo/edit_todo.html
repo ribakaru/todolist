@@ -42,7 +42,7 @@
 <body>
     <h2>編集フォーム</h2>
     <h3>ToDo ID: {{ todo_item.id }}</h3>
-        <form action ="{% url 'todo:edit_todo' %}" method="POST">
+        <form action ="{% url 'todo:edit_todo' todo_item.id %}" method="POST">
             {% csrf_token %}
             <div class ="mb-3">
                 <label for="title" class="form-label">タイトル</label>
@@ -51,7 +51,6 @@
             <div class="mb-3">
                 <label for="description" class="form-label">詳細</label>
                 <input type="text" class="form-control" id="description" name="description" value="{{ todo_item.description}}" />
-                <form action="{% url 'todo:add_todo' %}" method="POST"></form>
                 {% csrf_token %}
                     <button type="submit" class="btn btn-primary">更新</button>
                     <!-- <a href="{% url 'todo:todo_list' %}" class="btn btn-secondary">戻る</a> -->

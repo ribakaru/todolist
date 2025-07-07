@@ -34,13 +34,12 @@ def add_todo(request):
             todo_item.save()
             # print(ToDoItem.objects.last().description)
         return render(request, 'todo/add_todo.html')
-        
     # print('not')
     return render(request, 'todo/add_todo.html')
 
 #リストの編集
-def edit_todo(request,):
-    todo_item = ToDoItem.objects.get(id='62')
+def edit_todo(request, pk):
+    todo_item = ToDoItem.objects.get(pk=pk)
     ###########################################################################################
     """ print(todo_item.title)
     print(todo_item.description)
@@ -59,12 +58,15 @@ def edit_todo(request,):
             todo_item.description = request.POST.get('description')
             print(todo_item.title)
             todo_item.save()
-        return redirect('todo:edit_todo')
+        return redirect('todo:todo_list')
     return render(request, 'todo/edit_todo.html')
 
 
+
 #リストの削除
-def delete_todo(request, todo_id):
+def delete_todo(request, pk):
+    todo_item = ToDoItem.objects.get(pk=pk)
+    ###########################################################################################
     return render(request, 'todo/delete_todo.html')
 
 #リストの表示
