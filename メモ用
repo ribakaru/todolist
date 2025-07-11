@@ -36,7 +36,7 @@ htmlのみならそれぞれ開くことができる
 
 3/14 ログを活用する
 宿題はviewのリスト追加、
-git hub　のブランチの切り方　#cdで移動してから行う事
+git hubのブランチの切り方　#cdで移動してから行う事
 git checkout -b ブランチ名 #新しいブランチを作成して移動
 git add -A 
 git status
@@ -97,3 +97,5 @@ print(t)
 　　　　　　　　　54行目<form action="{% url 'todo:add_todo' %}" method="POST"></form>は削除した（2重であったため）
 　　views.py 68行目todo_item = ToDoItem.objects.get(pk=pk)追加した。
 
+7/11 削除機能をeditを参考にしながら作成した、前のサイトも参考にしながらした。
+　　todo_listの追加ボタンの位置の変更と編集、削除ボタンをbtn-groupに変更

@@ -66,6 +66,13 @@ def edit_todo(request, pk):
 #リストの削除
 def delete_todo(request, pk):
     todo_item = ToDoItem.objects.get(pk=pk)
+    print(todo_item)
+    if request.method == "GET":
+        return render(request, 'todo/delete_todo.html', {'todo_item': todo_item})
+    if request.method == "POST":
+        todo_item.delete()
+        print('deleteされました')
+        return redirect('todo:todo_list')
     ###########################################################################################
     return render(request, 'todo/delete_todo.html')
 

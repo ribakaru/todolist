@@ -43,12 +43,11 @@
     <h2>削除</h2>
     <h3>ToDo ID: {{ todo_item.id }}</h3>
     <form action="{% url 'todo:delete_todo' todo_item.id %}" method="POST">
-        <!-- セキュリティー対策 -->
+        {% csrf_token %}<!-- セキュリティー対策 -->
+        <p>{{ todo_item.title }}</p><!-- タイトルを表示 -->
+        <p>本当に削除しますか？</p>
+        <button type="submit" class="btn btn-danger">削除</button><!-- 削除ボタン -->
         {% csrf_token %}
-        <!-- タイトルを表示 -->
-        <p>{{ todo.title }}</p>
-        <!-- 削除ボタン -->
-        <button type="submit" class="btn btn-danger">削除</button>
     </form>
     <!-- Bootstrap JS and dependencies -->  
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
