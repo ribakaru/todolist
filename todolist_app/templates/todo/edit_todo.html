@@ -40,8 +40,22 @@
     </style>
 </head>
 <body>
-    <h2>編集</h2>
-    
+    <h2>編集フォーム</h2>
+    <h3>ToDo ID: {{ todo_item.id }}</h3>
+        <form action ="{% url 'todo:edit_todo' todo_item.id %}" method="POST">
+            {% csrf_token %}
+            <div class ="mb-3">
+                <label for="title" class="form-label">タイトル</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ todo_item.title }}" />
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">詳細</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{ todo_item.description}}" />
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">更新</button>
+                    <!-- <a href="{% url 'todo:todo_list' %}" class="btn btn-secondary">戻る</a> -->
+            </div> 
+        </form>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

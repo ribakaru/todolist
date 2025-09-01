@@ -1,10 +1,11 @@
 1/29　vscodeではロケットを飛ばすことができるところまで
-git add . これでプロジェクト内で変更された全てのファイルがコミット対象になります。
-git commit -m "Initial commit"　ここでコミットした内容はローカルリポジトリでしか反映されていません。そこでGitHub側にもコードを保存したい。
-飛んでいる
-git remote add origin url　URLは先ほどGitHubから取得してきたSSH用のURLです。　これでローカルリポジトリとリモートリポジトリの連携ができました。
-
-git push -u origin master ディレクトリの内容がGitにも保存されました。
+git hub 切り方(5/18更新)
+git branch #現在のブランチを確認
+git checkout -b ブランチ名 #新しいブランチを作成して移動
+git checkout ブランチ名 #指定したブランチに移動
+git add . 
+git commit -m "ブランチ名" #変更をコミット
+git push origin ブランチ名 #リモートリポジトリにプッシュ
 
 CRUD
 appの基本機能を作る
@@ -33,3 +34,78 @@ htmlのみならそれぞれ開くことができる
 3/11 add_todo.htmlからtodo_list.htmlに飛べるようになった
 けど、runserverの後の画面と違うページ？に飛んでるようような気がする。動くかすことはできるが保存されない。
 
+3/14 ログを活用する
+宿題はviewのリスト追加、
+git hubのブランチの切り方　#cdで移動してから行う事
+git checkout -b ブランチ名 #新しいブランチを作成して移動
+git add -A 
+git status
+git commit -m "ブランチ名"
+git push origin ブランチ名
+git checkout ブランチ名
+
+print(request.method)
+    if request.method == "POST": #POST(リソース新規生成)メソッドであるかどうかを判断
+        print("POSTメソッドです")
+        title = request.POST.get('title') #titleを取得
+        print(title)
+        description = request.POST.get('description') #descriptionを取得
+        print(description)
+        todo_item = ToDoItem(title="テストタイトル", description="テスト説明") #ToDoItemを作成
+        title == 'POST' #POSTメソッドであるかどうかを判断
+        todo_item.save() #保存
+        return redirect('/') #リストを追加
+
+3/24 add_todo.htmlからpostで送信されていないと思う。
+
+3/25 add_todo.html の65行目を<button type="submit" class="btn btn-primary" href="{}">追加</button>に変更したら動いた
+viewsも少し修正した。
+
+4/25　宿題　idとタイトルとdescriptionを表示させた一覧を作成
+　↪4/29　todo_list.htmlの<body>内の{{ todo.title}}に追加でidとdescriptionを追加したら表示され、見やすいようにdiv class=boxで調整した
+　テーブル関数なら一番上にid,title,descriptionと打てるかも？、todo_list.htmlにチェックボックスを追加した。
+
+5/14　viewsでの動きはチェックボックスの数が1つの場合に編集が出来るようにしたい。→　htmlはチェックされたidを取得し、編集できるようにしたい。
+　　　2つ以上のチェックボックスがある場合は、エラーを出すようにしたい。
+
+5/19　課題
+編集機能を作るステップ
+1. 編集ボタンを押して、編集ページを開いたときにデータベースに保存されている情報がすでにフォームに入っている状態を作る
+2. 書き換えたフォームの値で更新する
+paiza　練習問題　　D340:運搬コスト,D334:1週間の食費,D280:時給と勤務時間
+↪5/19　編集ボタンをIDの横に追加した。
+
+5/29　paiza練習問題D340終了、D334終了
+
+6/1　編集を押したらidを取得し、データを引っ張ることができた。（指定されたもの）
+D280時給と勤務時間　・1 行目に 時給を表す整数 W と分単位の勤務時間 M が半角スペース区切りで与えられます。・入力は合計で 1 行となり、末尾に改行が 1 つ入ります。
+これが出来なかった。
+input_line = input()
+w = (int(input_line.split()[0]))
+m = (int(input_line.split()[1]))
+x = w // 60
+t = x * m
+print(t)
+
+6/16　ページに飛ぶようにする
+宿題　paiza C168誕生日ソート　#日付を使えるようにする python 日付　などで検索する　django ルーティング詳細ページ
+
+6/30　urls.pyのpathを<int:pk>を追加、エラーが起きる。原因はtodo_list.htmlの53行目だと思う。
+
+7/6 views.py 42行目todo_item = ToDoItem.objects.get(pk=id)→todo_item = ToDoItem.objects.get(pk=pk)に変更したら動いた、61行目return redirect('todo:todo_list')に変更した。
+　　edit_todo.html45行目<form action ="{% url 'todo:edit_todo' %}" method="POST">→<form action ="{% url 'todo:edit_todo' todo_item.id %}" method="POST">に変更した。
+　　　　　　　　　54行目<form action="{% url 'todo:add_todo' %}" method="POST"></form>は削除した（2重であったため）
+　　views.py 68行目todo_item = ToDoItem.objects.get(pk=pk)追加した。
+
+7/11 削除機能をeditを参考にしながら作成した、前のサイトも参考にしながらした。
+　　todo_listの追加ボタンの位置の変更と編集、削除ボタンをbtn-groupに変更
+
+8/4 何をしていけばゴールにたどり着くか手順をかく
+スタートとゴールを書く→
+月と日付の文字列を複数与えられる（スタート）→月と日付の文字列を並び替える（ゴール）
+C101 C077 C159 夏休みの宿題
+
+9/1 壁を作ってみる　バリデーション
+　タイトルは必要　タイトルは20文字までOK
+　詳細は100文字まで　
+　
