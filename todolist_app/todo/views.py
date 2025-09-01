@@ -32,8 +32,11 @@ def add_todo(request):
             # print('ok')
             todo_item = ToDoItem(title=title, description=description)
             todo_item.save()
+            #データの取得して
+            todos = ToDoItem.objects.all()
+            #listを返す
             # print(ToDoItem.objects.last().description)
-        return render(request, 'todo/add_todo.html')
+        return render(request, 'todo/todo_list.html' , {'todos': todos})
     # print('not')
     return render(request, 'todo/add_todo.html')
 
@@ -58,7 +61,8 @@ def edit_todo(request, pk):
             todo_item.description = request.POST.get('description')
             print(todo_item.title)
             todo_item.save()
-        return redirect('todo:todo_list')
+            todos = ToDoItem.objects.all()
+        return render(request , 'todo/todo_list.html' , {'todos': todos})
     return render(request, 'todo/edit_todo.html')
 
 
@@ -72,7 +76,8 @@ def delete_todo(request, pk):
     if request.method == "POST":
         todo_item.delete()
         print('deleteされました')
-        return redirect('todo:todo_list')
+        todos = ToDoItem.objects.all()
+        return render(request , 'todo/todo_list.html' , {'todos': todos})
     ###########################################################################################
     return render(request, 'todo/delete_todo.html')
 
